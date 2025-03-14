@@ -118,14 +118,15 @@ export default function Chart({
           />
           <YAxis
             domain={["auto", "auto"]}
-            tickFormatter={(value) => `$${value.toFixed(2)}`}
+            tickFormatter={(value) => `DKK${value.toFixed(2)}`}
+            tick={{ fontSize: 10 }}
           />
           <Tooltip
             formatter={(value: number, name: string) => {
-              if (name === "Price") return [`$${value.toFixed(2)}`, "Price"];
+              if (name === "Price") return [`DKK${value.toFixed(2)}`, "Price"];
               if (name.includes("Moving"))
                 return [
-                  `$${value.toFixed(2)}`,
+                  `DKK${value.toFixed(2)}`,
                   `${movingAvgWindow}-Day Moving Avg`,
                 ];
               return value;
@@ -138,7 +139,7 @@ export default function Chart({
           <Line
             type="monotone"
             dataKey="price"
-            stroke="#3b82f6"
+            stroke="rgb(28 57 142)"
             strokeWidth={2}
             dot={{ r: 3 }}
             activeDot={{ r: 5 }}
