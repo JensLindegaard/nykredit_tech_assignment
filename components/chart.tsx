@@ -78,8 +78,12 @@ export default function Chart({
             value={visibleCount}
             onChange={(e) => setVisibleCount(Number(e.target.value))}
           >
+            <option value={10}>10 points</option>
             <option value={20}>20 points</option>
+            <option value={30}>30 points</option>
+            <option value={40}>40 points</option>
             <option value={50}>50 points</option>
+            <option value={75}>75 points</option>
             <option value={100}>100 points</option>
             <option value={data.length}>All data</option>
           </select>
