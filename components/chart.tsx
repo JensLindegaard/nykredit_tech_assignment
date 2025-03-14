@@ -45,7 +45,7 @@ export default function Chart({
   selectedInstrument,
   selectedTab,
 }: ChartProps) {
-  const [visibleCount, setVisibleCount] = useState(20); // Default to showing last 50 points
+  const [visibleCount, setVisibleCount] = useState(20); // Default to showing last 20 points
   const [movingAvgWindow, setMovingAvgWindow] = useState(5); // Default moving average window size
 
   // Sort and limit data points
