@@ -14,17 +14,18 @@ interface Data {
 }
 
 export default function Home() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<Data | null>(null);
   const [selectedInstrument, setSelectedInstrument] = useState<
-    keyof Data | null
+    "Inst1" | "Inst2"
   >("Inst1");
-  const [count, setCount] = useState(20);
+  const [selectedTab, setSelectedTab] = useState<"price" | "movingAverage">(
+    "price"
+  );
 
   useEffect(() => {
     fetch("/input_data.json")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch data");
-        console.log(data);
         return res.json();
       })
       .then(setData)
@@ -33,66 +34,24 @@ export default function Home() {
       });
   }, []);
 
-  useEffect(() => {
-    setCount(20);
-  }, [selectedInstrument]);
-
   return (
-    <div className="flex flex-col">
-      <div className="flex gap-6 py-4">
-        <button
-          className={`flex justify-center min-w-[140px] border-[1px] py-2 px-4 rounded-3xl hover:cursor-pointer transition-all duration-200
-            ${
-              selectedInstrument === "Inst1"
-                ? "bg-blue-900 text-white border-blue-900 scale-105 opacity-90"
-                : "border-blue-900 hover:bg-blue-900 hover:border-white hover:text-white hover:opacity-90"
-            }`}
-          onClick={() => setSelectedInstrument("Inst1")}
-        >
-          Instrument 1
-        </button>
-        <button
-          className={`flex justify-center min-w-[140px] border-[1px] py-2 px-4 rounded-3xl 
-            hover:cursor-pointer transition-all duration-200 ease-in-out
-            ${
-              selectedInstrument === "Inst2"
-                ? "bg-blue-900 text-white border-blue-900 scale-105 opacity-90"
-                : "border-blue-900 hover:bg-blue-900 hover:border-white hover:text-white hover:opacity-90"
-            }`}
-          onClick={() => setSelectedInstrument("Inst2")}
-        >
-          Instrument 2
-        </button>
+    <div className="flex flex-col gap-6 py-6">
+      <div className="flex gap-6">
+        <Controls
+          selectedInstrument={selectedInstrument}
+          setSelectedInstrument={setSelectedInstrument}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
       </div>
-      <div className="flex flex-row gap-6">
+      <div className="flex flex-row gap-6 w-full">
         {data && selectedInstrument && (
-          <div>
-            <ul>
-              {data[selectedInstrument]
-                .sort(
-                  (first: InstrumentData, last: InstrumentData) =>
-                    new Date(last.date).getTime() -
-                    new Date(first.date).getTime()
-                )
-                .slice(0, count)
-                .map((item: InstrumentData, index: number) => (
-                  <li key={index}>
-                    {item.date}: {item.price}
-                  </li>
-                ))}
-            </ul>
-            {count < data[selectedInstrument].length && (
-              <button
-                className="mt-4 px-4 py-2 bg-blue-900 text-white rounded-lg hover:opacity-80 transition"
-                onClick={() => setCount((prev) => prev + 20)} // Load 20 more items
-              >
-                Show More
-              </button>
-            )}
-          </div>
+          <Chart
+            data={data[selectedInstrument]}
+            selectedInstrument={selectedInstrument}
+            selectedTab={selectedTab}
+          />
         )}
-        <Chart />
-        <Controls />
       </div>
     </div>
   );
