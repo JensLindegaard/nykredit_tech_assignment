@@ -71,7 +71,7 @@ export default function Chart({
 
       <div className="mb-4 flex flex-col md:flex-row items-center gap-4">
         {/* Select visible data count */}
-        <div className="flex items-center gap-2">
+        <div className="flex justify-start items-center gap-2 w-full lg:w-fit">
           <label className="text-sm">Show last:</label>
           <select
             className="border p-1 rounded-md"
@@ -91,7 +91,7 @@ export default function Chart({
 
         {/* Moving Average Window (Slider) - Only shows if "Moving Average" is selected */}
         {selectedTab === "movingAverage" && (
-          <div className="flex items-center gap-2">
+          <div className="flex w-full items-center gap-2 lg:w-fit">
             <label className="text-sm">Moving Avg Window:</label>
             <input
               type="range"

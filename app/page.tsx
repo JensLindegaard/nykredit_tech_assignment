@@ -35,8 +35,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-6 py-6">
-      <div className="flex gap-6">
+    <div className="flex flex-col gap-6 px-4 py-6 lg:px-0">
+      <div className="flex gap-6 w-full">
         <Controls
           selectedInstrument={selectedInstrument}
           setSelectedInstrument={setSelectedInstrument}
