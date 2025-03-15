@@ -71,15 +71,19 @@ export default function Chart({
 
       <div className="mb-4 flex flex-col md:flex-row items-center gap-4">
         {/* Select visible data count */}
-        <div className="flex items-center gap-2">
+        <div className="flex justify-start items-center gap-2 w-full lg:w-fit">
           <label className="text-sm">Show last:</label>
           <select
             className="border p-1 rounded-md"
             value={visibleCount}
             onChange={(e) => setVisibleCount(Number(e.target.value))}
           >
+            <option value={10}>10 points</option>
             <option value={20}>20 points</option>
+            <option value={30}>30 points</option>
+            <option value={40}>40 points</option>
             <option value={50}>50 points</option>
+            <option value={75}>75 points</option>
             <option value={100}>100 points</option>
             <option value={data.length}>All data</option>
           </select>
@@ -87,7 +91,7 @@ export default function Chart({
 
         {/* Moving Average Window (Slider) - Only shows if "Moving Average" is selected */}
         {selectedTab === "movingAverage" && (
-          <div className="flex items-center gap-2">
+          <div className="flex w-full items-center gap-2 lg:w-fit">
             <label className="text-sm">Moving Avg Window:</label>
             <input
               type="range"
@@ -118,14 +122,15 @@ export default function Chart({
           />
           <YAxis
             domain={["auto", "auto"]}
-            tickFormatter={(value) => `$${value.toFixed(2)}`}
+            tickFormatter={(value) => `DKK${value.toFixed(2)}`}
+            tick={{ fontSize: 10 }}
           />
           <Tooltip
             formatter={(value: number, name: string) => {
-              if (name === "Price") return [`$${value.toFixed(2)}`, "Price"];
+              if (name === "Price") return [`DKK${value.toFixed(2)}`, "Price"];
               if (name.includes("Moving"))
                 return [
-                  `$${value.toFixed(2)}`,
+                  `DKK${value.toFixed(2)}`,
                   `${movingAvgWindow}-Day Moving Avg`,
                 ];
               return value;
@@ -138,7 +143,7 @@ export default function Chart({
           <Line
             type="monotone"
             dataKey="price"
-            stroke="#3b82f6"
+            stroke="rgb(28 57 142)"
             strokeWidth={2}
             dot={{ r: 3 }}
             activeDot={{ r: 5 }}

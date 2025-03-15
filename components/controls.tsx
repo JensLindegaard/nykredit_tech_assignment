@@ -15,14 +15,14 @@ export default function Controls({
   setSelectedTab,
 }: ControlsProps) {
   return (
-    <div className="flex flex-col p-4 bg-white border-[1px] border-gray-300 rounded-lg shadow-md">
+    <div className="flex flex-col w-full p-4 bg-white border-[1px] border-gray-300 rounded-lg shadow-md lg:w-fit">
       <p className="font-semibold pb-2">Select Instrument</p>
-      <div className="flex flex-row gap-6">
+      <div className="flex flex-row gap-6 w-full justify-between">
         <button
           className={`flex justify-center min-w-[140px] border-[1px] py-2 px-4 rounded-lg hover:cursor-pointer transition-all duration-200
             ${
               selectedInstrument === "Inst1"
-                ? "bg-blue-900 text-white border-blue-900 scale-105 opacity-90"
+                ? "bg-blue-900 text-white border-blue-900 scale-105 "
                 : "border-blue-900 hover:bg-blue-900 hover:border-white hover:text-white hover:opacity-90"
             }`}
           onClick={() => setSelectedInstrument("Inst1")}
@@ -34,7 +34,7 @@ export default function Controls({
             hover:cursor-pointer transition-all duration-200 ease-in-out
             ${
               selectedInstrument === "Inst2"
-                ? "bg-blue-900 text-white border-blue-900 scale-105 opacity-90"
+                ? "bg-blue-900 text-white border-blue-900 scale-105 "
                 : "border-blue-900 hover:bg-blue-900 hover:border-white hover:text-white hover:opacity-90"
             }`}
           onClick={() => setSelectedInstrument("Inst2")}
