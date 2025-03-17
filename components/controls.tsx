@@ -15,7 +15,7 @@ export default function Controls({
   setSelectedTab,
 }: ControlsProps) {
   return (
-    <div className="flex flex-col w-full p-4 bg-white border-[1px] border-gray-300 rounded-lg shadow-md lg:w-fit">
+    <div className="flex flex-col w-full  p-4 bg-white border-[1px] border-gray-300 rounded-lg shadow-md lg:w-fit">
       <p className="font-semibold pb-2">Select Instrument</p>
       <div className="flex flex-row gap-6 w-full justify-between">
         <button
