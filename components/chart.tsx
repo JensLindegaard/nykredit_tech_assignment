@@ -51,6 +51,7 @@ export default function Chart({
   // Sort and limit data points
   const sortedData = [...data]
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .filter((item) => item.price >= 0)  // Filter out negative prices
     .slice(-visibleCount)
     .map((item) => ({
       ...item,
